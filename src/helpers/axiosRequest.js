@@ -25,7 +25,7 @@ import axios from 'axios'
  *
  */
 const axiosRequest = async (data = { url, method, data }) => {
-  const baseURL = 'https://pokemon-pichincha.herokuapp.com/pokemons'
+  const baseURL = 'https://bp-pokemons.herokuapp.com'
   const _axios = axios.create({
     baseURL,
     timeout: 10000,
