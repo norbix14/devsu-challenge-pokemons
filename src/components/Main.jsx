@@ -7,6 +7,7 @@ const Main = ({
   setIsEditing,
   setHide,
   setNotFound,
+  setBtnDisabled,
 }) => {
   const handleClick = async ({ type = 'default' }) => {
     switch (type.toLowerCase()) {
@@ -14,6 +15,7 @@ const Main = ({
         setHide(false)
         setAddPokemon(true)
         setIsEditing(true)
+        setBtnDisabled(false)
         setPokemon(pokemon)
         break
       case 'delete':

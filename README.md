@@ -14,6 +14,7 @@
 ![Challenge](screenshots/pokemon.png "Pokemon")
 ![Challenge](screenshots/add.png "Nuevo")
 ![Challenge](screenshots/edit.png "Editar")
+![Challenge](screenshots/mobile.png "Mobile")
 
 ## Ejecutar la aplicación
 
@@ -47,4 +48,3 @@
 ### Visualizar
 
 * Abrir navegador en [localhost](http://localhost:3000 "puerto 3000")
-* `Nota: al día Lunes 13 de Junio de 2022 alrededor del mediodía (hora de Argentina), el` [backend](https://pokemon-pichincha.herokuapp.com/pokemons "backend") `dejó de funcionar.`

@@ -8,6 +8,7 @@ const Header = ({
   setIsEditing,
   setHide,
   setNotFound,
+  setBtnDisabled,
 }) => {
   const [value, setValue] = useState('')
   const handleSubmit = async (e) => {
@@ -29,7 +30,7 @@ const Header = ({
         setNotFound({ error: false, message: '' })
         setPokemon(pokemon)
       } else {
-        setNotFound({ error: true, message: 'No se encontro ningún Pokemon' })
+        setNotFound({ error: true, message: 'No se encontró ningún Pokemon' })
         setPokemon({})
       }
     }
@@ -41,6 +42,7 @@ const Header = ({
         setIsEditing(false)
         setHide(false)
         setAddPokemon(true)
+        setBtnDisabled(true)
         break
       case 'default':
       default:
@@ -67,7 +69,7 @@ const Header = ({
       </form>
       <button
         type="button"
-        className="bg-main color-white btn btn-action py-2 px-4"
+        className="bg-main color-white btn btn-action py-4 px-4"
         onClick={() => handleClick({ type: 'add' })}
       >
         <i className="bx bx-plus"></i> Nuevo

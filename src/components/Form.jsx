@@ -2,7 +2,15 @@ import { useMemo, useEffect, useState } from 'react'
 
 import { axiosRequest } from '../helpers'
 
-const Form = ({ setPokemon, pokemon, isEditing, setHide, setNotFound }) => {
+const Form = ({
+  setPokemon,
+  pokemon,
+  isEditing,
+  setHide,
+  setNotFound,
+  btnDisabled,
+  setBtnDisabled,
+}) => {
   const emptyState = {
     attack: '0',
     defense: '0',
@@ -18,7 +26,6 @@ const Form = ({ setPokemon, pokemon, isEditing, setHide, setNotFound }) => {
     image: false,
     name: false,
   })
-  const [disabled, setDisabled] = useState(true)
   const inputText = useMemo(() => {
     return [
       {
@@ -62,20 +69,24 @@ const Form = ({ setPokemon, pokemon, isEditing, setHide, setNotFound }) => {
     } else {
       setFieldError({ ...fieldError, [name]: false })
     }
-    if (fieldError['name'] || fieldError['image']) {
-      setDisabled(true)
-    } else {
-      setDisabled(false)
-    }
   }
   const handleChange = (e) => {
     const { name, value } = e.target
     setValues({ ...values, [name]: value })
     checkFields(name, value)
   }
-  const handleBlurFocus = (e) => {
+  const handleFocus = (e) => {
     const { name, value } = e.target
     checkFields(name, value)
+  }
+  const handleBlur = (e) => {
+    const { name, value } = e.target
+    checkFields(name, value)
+    if (fieldError['name'] || fieldError['image']) {
+      setBtnDisabled(true)
+    } else {
+      setBtnDisabled(false)
+    }
   }
   const handleClick = async ({ type = 'default' }) => {
     const data = {
@@ -84,6 +95,7 @@ const Form = ({ setPokemon, pokemon, isEditing, setHide, setNotFound }) => {
       defense: parseInt(values.defense),
       hp: parseInt(values.hp) || 100,
       idAuthor: values.idAuthor || 1,
+      id_author: values.id_author || 1,
       type: values.type || 'normal',
     }
     const url = isEditing ? `/${values.id}` : '/?idAuthor=1'
@@ -102,12 +114,12 @@ const Form = ({ setPokemon, pokemon, isEditing, setHide, setNotFound }) => {
         } else {
           setNotFound({ error: false, message: '' })
           setPokemon(result.data)
-          setDisabled(true)
+          setBtnDisabled(true)
           setHide(true)
         }
         break
       case 'cancel':
-        setDisabled(true)
+        setBtnDisabled(true)
         setHide(true)
       case 'default':
       default:
@@ -117,6 +129,7 @@ const Form = ({ setPokemon, pokemon, isEditing, setHide, setNotFound }) => {
   useEffect(() => {
     if (isEditing) {
       setValues(pokemon)
+      setFieldError({ ...fieldError, name: false, image: false })
     } else {
       setValues(emptyState)
     }
@@ -124,9 +137,9 @@ const Form = ({ setPokemon, pokemon, isEditing, setHide, setNotFound }) => {
   return (
     <div className="form-container border-gray py-4 bg-white">
       <h3 className="text-center">{isEditing ? 'Editar' : 'Nuevo'} Pokemon</h3>
-      <form onSubmit={handleSubmit}>
+      <form className="form-crud" onSubmit={handleSubmit}>
         <div className="inputs mt-2 mb-2">
-          <div className="">
+          <div>
             {inputText.map(({ type, name, placeholder, id, key }) => (
               <div className="fields text mb-2" key={key}>
                 <label htmlFor={id}>{placeholder}: </label>
@@ -139,8 +152,8 @@ const Form = ({ setPokemon, pokemon, isEditing, setHide, setNotFound }) => {
                   id={id}
                   value={values[name]}
                   onChange={handleChange}
-                  onBlur={handleBlurFocus}
-                  onFocus={handleBlurFocus}
+                  onBlur={handleBlur}
+                  onFocus={handleFocus}
                 />
               </div>
             ))}
@@ -168,16 +181,16 @@ const Form = ({ setPokemon, pokemon, isEditing, setHide, setNotFound }) => {
         </div>
         <div className="more-actions">
           <button
-            className="bg-main color-white btn btn-action py-2 px-4"
+            className="bg-main color-white btn btn-action py-4 px-4"
             type="submit"
-            disabled={disabled}
+            disabled={btnDisabled}
             onClick={() => handleClick({ type: 'save' })}
           >
             <i className="bx bxs-save"></i>{' '}
             {isEditing ? 'Actualizar' : 'Guardar'}
           </button>
           <button
-            className="bg-main color-white btn btn-action py-2 px-4"
+            className="bg-main color-white btn btn-action py-4 px-4"
             type="button"
             onClick={() => handleClick({ type: 'cancel' })}
           >

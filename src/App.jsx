@@ -9,6 +9,7 @@ function App() {
   const [addPokemon, setAddPokemon] = useState(false)
   const [hide, setHide] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
+  const [btnDisabled, setBtnDisabled] = useState(true)
   const [notFound, setNotFound] = useState({
     error: false,
     message: 'Not found',
@@ -24,6 +25,7 @@ function App() {
           setIsEditing={setIsEditing}
           setHide={setHide}
           setNotFound={setNotFound}
+          setBtnDisabled={setBtnDisabled}
         />
         {isEmpty(pokemon) && (
           <Message message="Ingresa el nombre del Pokemon" />
@@ -37,15 +39,18 @@ function App() {
             setIsEditing={setIsEditing}
             setHide={setHide}
             setNotFound={setNotFound}
+            setBtnDisabled={setBtnDisabled}
           />
         )}
         {addPokemon && !hide && (
           <Form
             pokemon={pokemon}
+            btnDisabled={btnDisabled}
             isEditing={isEditing}
             setPokemon={setPokemon}
             setHide={setHide}
             setNotFound={setNotFound}
+            setBtnDisabled={setBtnDisabled}
           />
         )}
       </div>
