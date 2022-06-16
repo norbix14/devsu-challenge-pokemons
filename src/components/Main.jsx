@@ -43,7 +43,7 @@ const Main = ({
     }
   }
   return (
-    <div className="main mb-2 bg-white">
+    <main className="main mb-2 bg-white">
       <table>
         <thead>
           <tr className="color-secondary">
@@ -87,7 +87,7 @@ const Main = ({
           </tr>
         </tbody>
       </table>
-    </div>
+    </main>
   )
 }
 

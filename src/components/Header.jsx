@@ -50,7 +50,7 @@ const Header = ({
     }
   }
   return (
-    <div className="header mt-2 mb-2">
+    <header className="header mt-2 mb-2">
       <form
         className="form-search bg-white py-2 border-gray"
         onSubmit={handleSubmit}
@@ -74,7 +74,7 @@ const Header = ({
       >
         <i className="bx bx-plus"></i> Nuevo
       </button>
-    </div>
+    </header>
   )
 }
 

@@ -39,10 +39,16 @@
     npm install
   ```
 
-### Ejecutar
+### Ejecutar aplicación
 
   ```bash
     npm run dev
+  ```
+
+### Ejecutar tests
+
+  ```bash
+    npm run test
   ```
 
 ### Visualizar

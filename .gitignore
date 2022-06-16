@@ -24,3 +24,6 @@ package-lock.json
 *.sln
 *.sw?
 *.sublime-workspace
+
+# Tests snapshots
+*__snapshots__*
